@@ -71,33 +71,22 @@ def realizar_jugada():
     else:
         print("Error al enviar la jugada.")
 
-# Función consultar resultado
+#funcion consultar resultado
 def consultar_resultado_juego():
     url = 'http://192.168.24.128:8080/backend/api/resultado'
     response = requests.get(url)
     if response.status_code == 200:
         resultado_juego = response.json()
         if 'jugador_ganador' in resultado_juego and resultado_juego['jugador_ganador'] != "None":
-            template_path = os.path.join(os.path.dirname(__file__), 'templates', 'resultado.html')
-            with open(template_path, 'r') as file:
-                template = file.read()
-
-            puntajes_html = ""
-            for jugador, puntaje in resultado_juego['puntajes'].items():
-                puntajes_html += f"<li>{jugador}: {puntaje}</li>"
-
-            rendered_template = template.replace('{{ jugadores }}', str(resultado_juego['jugadores'])) \
-                .replace('{{ jugadas }}', str(resultado_juego['jugadas'])) \
-                .replace('{{ juego_id }}', str(juego_id)) \
-                .replace('{{ jugador_ganador }}', str(resultado_juego['jugador_ganador'])) \
-                .replace('{{ puntajes }}', puntajes_html)
-            print(rendered_template)
+            print("Nombre de los jugadores:", resultado_juego['jugadores'])
+            print("Valores de las jugadas:", resultado_juego['jugadas'])
+            print(f"ID del juego: {juego_id}")
+            print("Jugador Ganador:", resultado_juego['jugador_ganador'])
+            print("Puntaje acumulado de los jugadores:", resultado_juego['puntajes'])
         else:
-            print("Aún no hay jugador ganador")
+            print("Aun no hay jugador ganador")
     else:
         print("No se pudo obtener el resultado del juego.")
-
-
 
 #Aspecto visual MENU PRINCIPAL
 def mostrar_menu():
