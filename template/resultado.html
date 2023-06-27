@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resultado del juego</title>
+</head>
+<body>
+    <h1>Resultado del juego</h1>
+    <p>Nombre de los jugadores: {{ jugadores }}</p>
+    <p>Valores de las jugadas: {{ jugadas }}</p>
+    <p>ID del juego: {{ juego_id }}</p>
+    <p>Jugador Ganador: {{ jugador_ganador }}</p>
+    <p>Puntaje acumulado de los jugadores:</p>
+    <ul>
+        % for jugador, puntaje in puntajes.items():
+            <li>{{ jugador }}: {{ puntaje }}</li>
+        % end
+    </ul>
+</body>
+</html>
+
