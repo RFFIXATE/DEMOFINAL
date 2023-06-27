@@ -81,16 +81,22 @@ def consultar_resultado_juego():
             template_path = os.path.join(os.path.dirname(__file__), 'templates', 'resultado.html')
             with open(template_path, 'r') as file:
                 template = file.read()
+
+            puntajes_html = ""
+            for jugador, puntaje in resultado_juego['puntajes'].items():
+                puntajes_html += f"<li>{jugador}: {puntaje}</li>"
+
             rendered_template = template.replace('{{ jugadores }}', str(resultado_juego['jugadores'])) \
                 .replace('{{ jugadas }}', str(resultado_juego['jugadas'])) \
                 .replace('{{ juego_id }}', str(juego_id)) \
                 .replace('{{ jugador_ganador }}', str(resultado_juego['jugador_ganador'])) \
-                .replace('{{ puntajes }}', str(resultado_juego['puntajes']))
+                .replace('{{ puntajes }}', puntajes_html)
             print(rendered_template)
         else:
             print("Aún no hay jugador ganador")
     else:
         print("No se pudo obtener el resultado del juego.")
+
 
 
 #Aspecto visual MENU PRINCIPAL
